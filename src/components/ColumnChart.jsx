@@ -9,7 +9,7 @@ function ColumnChart({ data }) {
       lineWidth: 10,
     },
     xField: 'month',
-    yField: 'value',
+    yField: 'total',
     maxBarWidth: 10,
     xAxis: {
       label: {

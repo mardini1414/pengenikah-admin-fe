@@ -12,12 +12,14 @@
   "dependencies": {
     "@ant-design/charts": "1.4.2",
     "antd": "^5.13.1",
+    "axios": "^1.6.5",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.2",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

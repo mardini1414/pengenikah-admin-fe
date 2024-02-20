@@ -7,8 +7,11 @@ function CardSummary({ icon, label, value, colorIcon, backgrounIcon }) {
         display: 'flex',
         gap: '2rem',
         alignItems: 'center',
-        padding: '1rem 2rem',
+        padding: '2.5rem 2rem',
         color: '#313131',
+        borderRadius: '0.5rem',
+        boxShadow:
+          '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
       }}
     >
       <div

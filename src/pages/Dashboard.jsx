@@ -2,103 +2,71 @@ import React from 'react';
 import MainLayout from '../components/MainLayout';
 import { Col, DatePicker, Row } from 'antd';
 import ColumnChart from '../components/ColumnChart';
-import PieChart from '../components/PieChart';
 import CardSummary from '../components/CardSummary';
 import {
   SkinOutlined,
-  CheckCircleOutlined,
-  IssuesCloseOutlined,
+  PlayCircleOutlined,
   MailOutlined,
 } from '@ant-design/icons';
-
-const { RangePicker } = DatePicker;
-
-const pieData = [
-  {
-    type: 'Total',
-    value: 27,
-  },
-  {
-    type: 'Active',
-    value: 25,
-  },
-  {
-    type: 'Not Active',
-    value: 18,
-  },
-];
 
 const columnData = [
   {
     month: 'January',
-    value: 38,
+    total: 38,
   },
   {
     month: 'February',
-    value: 52,
+    total: 52,
   },
   {
     month: 'March',
-    value: 61,
+    total: 61,
   },
   {
     month: 'April',
-    value: 145,
+    total: 1,
   },
   {
     month: 'Mei',
-    value: 48,
+    total: 48,
   },
   {
     month: 'June',
-    value: 34,
+    total: 34,
   },
   {
     month: 'July',
-    value: 33,
+    total: 33,
   },
   {
     month: 'August',
-    value: 38,
+    total: 38,
   },
   {
     month: 'September',
-    value: 27,
+    total: 27,
   },
   {
     month: 'October',
-    value: 38,
+    total: 38,
   },
   {
     month: 'November',
-    value: 18,
+    total: 18,
   },
   {
     month: 'December',
-    value: 48,
+    total: 48,
   },
 ];
 
 function Dashboard() {
   return (
     <MainLayout>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          marginBottom: '2rem',
-        }}
-      >
-        <h3 style={{ color: '#313131' }}>Summary data</h3>
-        <RangePicker picker="year" />
-      </div>
       <Row gutter={20} style={{ marginBottom: '3rem' }}>
-        <Col span={12}>
-          <PieChart data={pieData} />
-        </Col>
-        <Col span={12}>
-          <Row gutter={[10, 10]}>
-            <Col span={24}>
+        <Col span={24}>
+          <Row gutter={10}>
+            <Col span={8}>
               <CardSummary
                 icon={<MailOutlined />}
                 colorIcon={'rgb(52, 104, 192)'}
@@ -107,30 +75,21 @@ function Dashboard() {
                 value={'1.000.000'}
               />
             </Col>
-            <Col span={24}>
-              <CardSummary
-                icon={<CheckCircleOutlined />}
-                colorIcon={'rgb(161, 238, 189)'}
-                backgrounIcon={'rgba(161, 238, 189, 0.25)'}
-                label={'Invitation Active'}
-                value={'1.000.000'}
-              />
-            </Col>
-            <Col span={24}>
-              <CardSummary
-                icon={<IssuesCloseOutlined />}
-                colorIcon={'rgb(210, 69, 69)'}
-                backgrounIcon={'rgba(210, 69, 69, 0.25)'}
-                label={'Invitation Not Active'}
-                value={'1.000.000'}
-              />
-            </Col>
-            <Col span={24}>
+            <Col span={8}>
               <CardSummary
                 icon={<SkinOutlined />}
                 colorIcon={'rgb(220, 132, 243)'}
                 backgrounIcon={'rgba(220, 132, 243, 0.25)'}
                 label={'Total Theme'}
+                value={'1.000.000'}
+              />
+            </Col>
+            <Col span={8}>
+              <CardSummary
+                icon={<PlayCircleOutlined />}
+                colorIcon={'rgb(210, 69, 69)'}
+                backgrounIcon={'rgba(210, 69, 69, 0.25)'}
+                label={'Total Song'}
                 value={'1.000.000'}
               />
             </Col>

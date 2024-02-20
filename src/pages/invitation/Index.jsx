@@ -8,64 +8,86 @@ const { RangePicker } = DatePicker;
 const dataSource = [
   {
     key: '1',
-    name: 'Dwi dan Angel',
+    brideName: 'Angela',
+    groomName: 'Munawier',
     theme: 'light',
-    date: '10 Juni 2024',
-    isActive: true,
+    song: 'Agun - Ketika Cinta Harus Memilih',
+    ceremony: '10 Juni 2024',
+    reception: '10 Juni 2024',
     created: '12 Mei 2024',
   },
   {
     key: '2',
-    name: 'Dwi dan Angel',
+    brideName: 'Angela',
+    groomName: 'Munawier',
     theme: 'light',
-    date: '10 Juni 2024',
-    isActive: true,
+    song: 'Agun - Ketika Cinta Harus Memilih',
+    ceremony: '10 Juni 2024',
+    reception: '10 Juni 2024',
     created: '12 Mei 2024',
   },
   {
     key: '3',
-    name: 'Dwi dan Angel',
+    brideName: 'Angela',
+    groomName: 'Munawier',
     theme: 'light',
-    date: '10 Juni 2024',
-    isActive: false,
+    song: 'Agun - Ketika Cinta Harus Memilih',
+    ceremony: '10 Juni 2024',
+    reception: '10 Juni 2024',
     created: '12 Mei 2024',
   },
   {
     key: '4',
-    name: 'Dwi dan Angel',
+    brideName: 'Angela',
+    groomName: 'Munawier',
     theme: 'light',
-    date: '10 Juni 2024',
-    isActive: true,
+    song: 'Agun - Ketika Cinta Harus Memilih',
+    ceremony: '10 Juni 2024',
+    reception: '10 Juni 2024',
     created: '12 Mei 2024',
   },
   {
     key: '5',
-    name: 'Dwi dan Angel',
+    brideName: 'Angela',
+    groomName: 'Munawier',
     theme: 'light',
-    date: '10 Juni 2024',
-    isActive: false,
+    song: 'Agun - Ketika Cinta Harus Memilih',
+    ceremony: '10 Juni 2024',
+    reception: '10 Juni 2024',
     created: '12 Mei 2024',
   },
   {
     key: '6',
-    name: 'Dwi dan Angel',
+    brideName: 'Angela',
+    groomName: 'Munawier',
     theme: 'light',
-    date: '10 Juni 2024',
-    isActive: true,
+    song: 'Agun - Ketika Cinta Harus Memilih',
+    ceremony: '10 Juni 2024',
+    reception: '10 Juni 2024',
+    created: '12 Mei 2024',
+  },
+  {
+    key: '7',
+    brideName: 'Angela',
+    groomName: 'Munawier',
+    theme: 'light',
+    song: 'Agun - Ketika Cinta Harus Memilih',
+    ceremony: '10 Juni 2024',
+    reception: '10 Juni 2024',
     created: '12 Mei 2024',
   },
 ];
 
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: 'Bride',
+    dataIndex: 'brideName',
+    key: 'brideName',
   },
   {
-    title: 'Wedding Date',
-    dataIndex: 'date',
-    key: 'date',
+    title: 'Groom',
+    dataIndex: 'groomName',
+    key: 'groomName',
   },
   {
     title: 'Theme',
@@ -73,21 +95,26 @@ const columns = [
     key: 'theme',
   },
   {
+    title: 'Song',
+    dataIndex: 'song',
+    key: 'song',
+  },
+  {
+    title: 'Ceremony',
+    dataIndex: 'ceremony',
+    key: 'ceremony',
+  },
+  {
+    title: 'Reception',
+    dataIndex: 'reception',
+    key: 'reception',
+  },
+  {
     title: 'Created',
     dataIndex: 'created',
     key: 'created',
   },
-  {
-    title: 'Status',
-    dataIndex: 'isActive',
-    key: 'isActive',
-    render: data =>
-      data ? (
-        <Tag color="green">ACTIVE</Tag>
-      ) : (
-        <Tag color="red">NOT ACTIVE</Tag>
-      ),
-  },
+
   {
     title: 'Action',
     dataIndex: 'action',
@@ -110,7 +137,7 @@ function Invitation() {
         <Col span={12}>
           <Row gutter={10}>
             <Col span={12}>
-              <Input placeholder="search" />
+              <Input placeholder="search name" />
             </Col>
             <Col span={12}>
               <RangePicker />
@@ -124,7 +151,7 @@ function Invitation() {
               type="primary"
               onClick={() => navigate('/invitation/create')}
             >
-              Add
+              Create
             </Button>
           </Row>
         </Col>
