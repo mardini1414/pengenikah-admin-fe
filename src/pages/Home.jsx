@@ -1,13 +1,7 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 function Home() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    navigate('/dashboard');
-  }, []);
-
+  window.open('/dashboard', '_self');
   return <div>Home</div>;
 }
 

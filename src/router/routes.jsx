@@ -2,6 +2,7 @@ import App from '../App';
 import NotFound from '../pages/404';
 import Dashboard from '../pages/Dashboard';
 import Home from '../pages/Home';
+import Login from '../pages/auth/Login';
 import Invitation from '../pages/invitation';
 
 const routes = [
@@ -13,6 +14,10 @@ const routes = [
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
       {
         path: '/dashboard',

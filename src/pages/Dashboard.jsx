@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainLayout from '../components/MainLayout';
 import { Col, DatePicker, Row } from 'antd';
 import ColumnChart from '../components/ColumnChart';
@@ -8,59 +8,20 @@ import {
   PlayCircleOutlined,
   MailOutlined,
 } from '@ant-design/icons';
-
-const columnData = [
-  {
-    month: 'January',
-    total: 38,
-  },
-  {
-    month: 'February',
-    total: 52,
-  },
-  {
-    month: 'March',
-    total: 61,
-  },
-  {
-    month: 'April',
-    total: 1,
-  },
-  {
-    month: 'Mei',
-    total: 48,
-  },
-  {
-    month: 'June',
-    total: 34,
-  },
-  {
-    month: 'July',
-    total: 33,
-  },
-  {
-    month: 'August',
-    total: 38,
-  },
-  {
-    month: 'September',
-    total: 27,
-  },
-  {
-    month: 'October',
-    total: 38,
-  },
-  {
-    month: 'November',
-    total: 18,
-  },
-  {
-    month: 'December',
-    total: 48,
-  },
-];
+import { useGet } from '../hooks/http/useHttp';
+import dayjs from 'dayjs';
 
 function Dashboard() {
+  const [year, setYear] = useState(new Date().getFullYear());
+
+  const { data: summary } = useGet('/summaries');
+  const { data: totalPerMonth } = useGet(
+    '/invitations/total-per-month?year=' + year
+  );
+  const totalInvitation = summary?.data.total_invitation;
+  const totalSong = summary?.data.total_song;
+  const totalTheme = summary?.data.total_theme;
+
   return (
     <MainLayout>
       <Row gutter={20} style={{ marginBottom: '3rem' }}>
@@ -72,7 +33,7 @@ function Dashboard() {
                 colorIcon={'rgb(52, 104, 192)'}
                 backgrounIcon={'rgba(52, 104, 192, 0.25)'}
                 label={'Total Invitation'}
-                value={'1.000.000'}
+                value={totalInvitation}
               />
             </Col>
             <Col span={8}>
@@ -81,7 +42,7 @@ function Dashboard() {
                 colorIcon={'rgb(220, 132, 243)'}
                 backgrounIcon={'rgba(220, 132, 243, 0.25)'}
                 label={'Total Theme'}
-                value={'1.000.000'}
+                value={totalTheme}
               />
             </Col>
             <Col span={8}>
@@ -90,7 +51,7 @@ function Dashboard() {
                 colorIcon={'rgb(210, 69, 69)'}
                 backgrounIcon={'rgba(210, 69, 69, 0.25)'}
                 label={'Total Song'}
-                value={'1.000.000'}
+                value={totalSong}
               />
             </Col>
           </Row>
@@ -108,10 +69,14 @@ function Dashboard() {
           <div>
             <h3 style={{ color: '#313131' }}>Total Invitation per month</h3>
           </div>
-          <DatePicker picker="year" />
+          <DatePicker
+            defaultValue={dayjs(new Date())}
+            onChange={v => setYear(v.year())}
+            picker="year"
+          />
         </div>
         <Col span={24}>
-          <ColumnChart data={columnData} />
+          <ColumnChart data={totalPerMonth?.data || []} />
         </Col>
       </Row>
     </MainLayout>

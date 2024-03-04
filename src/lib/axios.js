@@ -13,10 +13,11 @@ const http = axios.create({
 http.interceptors.response.use(
   value => value,
   err => {
-    if (err.response.status === 401 && !err.response.data) {
-      localStorage.clear();
-      window.open('/login', '_self');
-    }
+    console.log(err);
+    // if (err.response.status === 401 && !err.response.data) {
+    //   localStorage.clear();
+    //   window.open('/login', '_self');
+    // }
     return Promise.reject(err);
   }
 );
