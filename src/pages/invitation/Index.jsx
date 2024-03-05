@@ -1,92 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainLayout from '../../components/MainLayout';
 import { Button, Col, Input, Row, Table, DatePicker, Tag } from 'antd';
 import { PlusOutlined, EyeOutlined, EditOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { getInvitations } from '../../services/InvitationService';
+import { debounce } from '../../utils/debounce';
 
 const { RangePicker } = DatePicker;
-const dataSource = [
-  {
-    key: '1',
-    brideName: 'Angela',
-    groomName: 'Munawier',
-    theme: 'light',
-    song: 'Agun - Ketika Cinta Harus Memilih',
-    ceremony: '10 Juni 2024',
-    reception: '10 Juni 2024',
-    created: '12 Mei 2024',
-  },
-  {
-    key: '2',
-    brideName: 'Angela',
-    groomName: 'Munawier',
-    theme: 'light',
-    song: 'Agun - Ketika Cinta Harus Memilih',
-    ceremony: '10 Juni 2024',
-    reception: '10 Juni 2024',
-    created: '12 Mei 2024',
-  },
-  {
-    key: '3',
-    brideName: 'Angela',
-    groomName: 'Munawier',
-    theme: 'light',
-    song: 'Agun - Ketika Cinta Harus Memilih',
-    ceremony: '10 Juni 2024',
-    reception: '10 Juni 2024',
-    created: '12 Mei 2024',
-  },
-  {
-    key: '4',
-    brideName: 'Angela',
-    groomName: 'Munawier',
-    theme: 'light',
-    song: 'Agun - Ketika Cinta Harus Memilih',
-    ceremony: '10 Juni 2024',
-    reception: '10 Juni 2024',
-    created: '12 Mei 2024',
-  },
-  {
-    key: '5',
-    brideName: 'Angela',
-    groomName: 'Munawier',
-    theme: 'light',
-    song: 'Agun - Ketika Cinta Harus Memilih',
-    ceremony: '10 Juni 2024',
-    reception: '10 Juni 2024',
-    created: '12 Mei 2024',
-  },
-  {
-    key: '6',
-    brideName: 'Angela',
-    groomName: 'Munawier',
-    theme: 'light',
-    song: 'Agun - Ketika Cinta Harus Memilih',
-    ceremony: '10 Juni 2024',
-    reception: '10 Juni 2024',
-    created: '12 Mei 2024',
-  },
-  {
-    key: '7',
-    brideName: 'Angela',
-    groomName: 'Munawier',
-    theme: 'light',
-    song: 'Agun - Ketika Cinta Harus Memilih',
-    ceremony: '10 Juni 2024',
-    reception: '10 Juni 2024',
-    created: '12 Mei 2024',
-  },
-];
-
 const columns = [
   {
     title: 'Bride',
-    dataIndex: 'brideName',
+    dataIndex: 'bride',
     key: 'brideName',
   },
   {
     title: 'Groom',
-    dataIndex: 'groomName',
+    dataIndex: 'groom',
     key: 'groomName',
   },
   {
@@ -129,7 +58,30 @@ const columns = [
 ];
 
 function Invitation() {
+  const [page, setPage] = useState(1);
+  const [name, setName] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const navigate = useNavigate();
+  const { invitations, total, isLoading } = getInvitations({
+    page,
+    name,
+    startDate,
+    endDate,
+  });
+
+  const debouncedName = debounce(e => {
+    setName(e.target.value);
+  }, 400);
+
+  function searchName(e) {
+    debouncedName(e);
+  }
+
+  function dateRange(e) {
+    setStartDate(e[0].format('YYYY-MM-D'));
+    setEndDate(e[1].format('YYYY-MM-D'));
+  }
 
   return (
     <MainLayout>
@@ -137,10 +89,10 @@ function Invitation() {
         <Col span={12}>
           <Row gutter={10}>
             <Col span={12}>
-              <Input placeholder="search name" />
+              <Input placeholder="search name" onChange={searchName} />
             </Col>
             <Col span={12}>
-              <RangePicker />
+              <RangePicker onChange={dateRange} />
             </Col>
           </Row>
         </Col>
@@ -156,7 +108,14 @@ function Invitation() {
           </Row>
         </Col>
       </Row>
-      <Table dataSource={dataSource} columns={columns} />;
+      <Table
+        scroll={{ x: 1536 }}
+        dataSource={invitations}
+        columns={columns}
+        loading={isLoading}
+        pagination={{ total, onChange: num => setPage(num) }}
+      />
+      ;
     </MainLayout>
   );
 }

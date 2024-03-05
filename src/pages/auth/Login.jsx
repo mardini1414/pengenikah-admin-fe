@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
 import { Button, Form, Input, Layout, message } from 'antd';
-import { usePost } from '../../hooks/http/useHttp';
 
 function Login() {
   const [pending, setPending] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
   const onFinish = async values => {
-    try {
-      setPending(true);
-      const { data } = await usePost('/auth/login', values);
-      localStorage.setItem('token', data.token);
-      window.open('/dashboard', '_self');
-    } catch (error) {
-      if (error.response.status === 401) {
-        messageApi.error('username or password is wrong');
-      } else {
-        messageApi.error('something when wrong');
-      }
-    } finally {
-      setPending(false);
-    }
+    // try {
+    //   setPending(true);
+    //   const { data } = await usePost('/auth/login', values);
+    //   localStorage.setItem('token', data.token);
+    //   window.open('/dashboard', '_self');
+    // } catch (error) {
+    //   if (error.response.status === 401) {
+    //     messageApi.error('username or password is wrong');
+    //   } else {
+    //     messageApi.error('something when wrong');
+    //   }
+    // } finally {
+    //   setPending(false);
+    // }
   };
 
   return (

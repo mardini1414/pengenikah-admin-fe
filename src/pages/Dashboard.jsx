@@ -8,19 +8,15 @@ import {
   PlayCircleOutlined,
   MailOutlined,
 } from '@ant-design/icons';
-import { useGet } from '../hooks/http/useHttp';
 import dayjs from 'dayjs';
+import { getInvitationPerMonth } from '../services/InvitationService';
+import { getSummaries } from '../services/SummaryService';
 
 function Dashboard() {
   const [year, setYear] = useState(new Date().getFullYear());
 
-  const { data: summary } = useGet('/summaries');
-  const { data: totalPerMonth } = useGet(
-    '/invitations/total-per-month?year=' + year
-  );
-  const totalInvitation = summary?.data.total_invitation;
-  const totalSong = summary?.data.total_song;
-  const totalTheme = summary?.data.total_theme;
+  const { totalPerMonth } = getInvitationPerMonth(year);
+  const { totalInvitation, totalSong, totalTheme } = getSummaries();
 
   return (
     <MainLayout>
@@ -76,7 +72,7 @@ function Dashboard() {
           />
         </div>
         <Col span={24}>
-          <ColumnChart data={totalPerMonth?.data || []} />
+          <ColumnChart data={totalPerMonth} />
         </Col>
       </Row>
     </MainLayout>
