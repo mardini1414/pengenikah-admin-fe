@@ -1,9 +1,10 @@
+import { Navigate } from 'react-router-dom';
 import App from '../App';
 import NotFound from '../pages/404';
 import Dashboard from '../pages/Dashboard';
-import Home from '../pages/Home';
 import Login from '../pages/auth/Login';
 import Invitation from '../pages/invitation';
+import EditInvitation from '../pages/invitation/EditInvitation';
 
 const routes = [
   {
@@ -13,7 +14,7 @@ const routes = [
     children: [
       {
         path: '/',
-        element: <Home />,
+        element: <Navigate to={'/dashboard'} replace />,
       },
       {
         path: '/login',
@@ -26,6 +27,10 @@ const routes = [
       {
         path: '/invitation',
         element: <Invitation />,
+      },
+      {
+        path: '/invitation/:id',
+        element: <EditInvitation />,
       },
       {
         path: '/invitation/create',

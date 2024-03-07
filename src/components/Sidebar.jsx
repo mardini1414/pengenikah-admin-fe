@@ -6,6 +6,7 @@ import {
   LogoutOutlined,
 } from '@ant-design/icons';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { logout } from '../services/AuthService';
 
 const { Sider } = Layout;
 
@@ -33,6 +34,7 @@ function Sidebar({ collapsed }) {
       danger: true,
       icon: <LogoutOutlined />,
       label: 'Logout',
+      onClick: () => logout(),
     },
   ];
 

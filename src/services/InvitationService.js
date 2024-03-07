@@ -25,9 +25,9 @@ export function getInvitations({ page, name, startDate, endDate }) {
         groom: v?.groom || '-',
         theme: v?.theme || '-',
         song: v?.song || '-',
-        ceremony: dayjs(v?.ceremony).format('YYYY MMMM D H:m') || '-',
-        reception: dayjs(v?.reception).format('YYYY MMMM D H:m') || '-',
-        created: dayjs(v?.created_at).format('YYYY MMMM D H:m') || '-',
+        ceremony: dayjs(v?.ceremony).format('D MMMM YYYY H:m') || '-',
+        reception: dayjs(v?.reception).format('D MMMM YYYY H:m') || '-',
+        created: dayjs(v?.created_at).format('D MMMM YYYY H:m') || '-',
       };
     }) || [];
   const pagination = data?.pagination;

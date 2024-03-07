@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
 import { Button, Form, Input, Layout, message } from 'antd';
+import { login } from '../../services/AuthService';
+import { Navigate } from 'react-router-dom';
 
 function Login() {
   const [pending, setPending] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const token = localStorage.getItem('token');
+
+  if (!!token) {
+    return <Navigate to={'/dashboard'} replace />;
+  }
 
   const onFinish = async values => {
-    // try {
-    //   setPending(true);
-    //   const { data } = await usePost('/auth/login', values);
-    //   localStorage.setItem('token', data.token);
-    //   window.open('/dashboard', '_self');
-    // } catch (error) {
-    //   if (error.response.status === 401) {
-    //     messageApi.error('username or password is wrong');
-    //   } else {
-    //     messageApi.error('something when wrong');
-    //   }
-    // } finally {
-    //   setPending(false);
-    // }
+    login(values, {
+      success: () => setPending(false),
+      pending: () => setPending(true),
+      error: err => {
+        setPending(false);
+        if (err?.response?.status === 401) {
+          messageApi.error('username or password is wrong');
+        } else {
+          messageApi.error('something when wrong');
+        }
+      },
+    });
   };
 
   return (

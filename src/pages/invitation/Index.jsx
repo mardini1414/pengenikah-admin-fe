@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import MainLayout from '../../components/MainLayout';
 import { Button, Col, Input, Row, Table, DatePicker, Tag } from 'antd';
 import { PlusOutlined, EyeOutlined, EditOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getInvitations } from '../../services/InvitationService';
 import { debounce } from '../../utils/debounce';
+import config from '../../config';
 
 const { RangePicker } = DatePicker;
 const columns = [
@@ -46,12 +47,14 @@ const columns = [
 
   {
     title: 'Action',
-    dataIndex: 'action',
-    key: 'action',
-    render: () => (
+    render: (text, record) => (
       <div style={{ display: 'flex', gap: 10 }}>
-        <Button icon={<EyeOutlined />}></Button>
-        <Button icon={<EditOutlined />}></Button>
+        <Link to={config.invitationUrl + '/' + record.slug} target="_blank">
+          <Button icon={<EyeOutlined />}></Button>
+        </Link>
+        <Link to={'/invitation/' + record.key}>
+          <Button icon={<EditOutlined />}></Button>
+        </Link>
       </div>
     ),
   },

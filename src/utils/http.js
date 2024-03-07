@@ -12,7 +12,7 @@ export function httpGet(url) {
   return useSWR(apiUrl + url, fetcher);
 }
 
-export function httpPost(url, body) {
+export async function httpPost(url, body) {
   return http.post(apiUrl + url, body);
 }
 
@@ -21,5 +21,5 @@ export function httpPut(url, body) {
 }
 
 export function httpDelete(url) {
-  return http.put(apiUrl + url);
+  return http.delete(apiUrl + url);
 }

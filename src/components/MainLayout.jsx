@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Layout, theme } from 'antd';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
+import { Navigate } from 'react-router-dom';
 const { Content } = Layout;
 
 function MainLayout({ children }) {
@@ -9,6 +10,10 @@ function MainLayout({ children }) {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return <Navigate to={'/login'} replace />;
+  }
   return (
     <Layout>
       <Sidebar collapsed={collapsed} />
